@@ -3,20 +3,18 @@ package reader;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
-import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import net.dv8tion.jda.api.EmbedBuilder;
 
-public class reader {
+public class partReader {
 
-    public static ArrayList<pilot> read() throws IOException {
+    public static ArrayList<part> read() throws IOException {
 
-        String fileName = "src/main/resources/pilots.csv";
-        ArrayList<pilot> pilots = new ArrayList<pilot>();
+        String fileName = "src/main/resources/parts.csv";
+        ArrayList<part> parts = new ArrayList<part>();
 
         try (FileInputStream fis = new FileInputStream(fileName);
              InputStreamReader isr = new InputStreamReader(fis,
@@ -25,17 +23,20 @@ public class reader {
             String[] nextLine;
 
             while ((nextLine = reader.readNext()) != null) {
-                pilot newPilot = new pilot(nextLine[0],nextLine[1],nextLine[2],nextLine[3],nextLine[4],nextLine[5],nextLine[6],nextLine[7],nextLine[8],nextLine[9]);
-                pilots.add(newPilot);
+                if(nextLine.length == 5)
+                {
+                    part newPart = new part(nextLine[0],nextLine[1],nextLine[2],nextLine[3],nextLine[4]);
+                    parts.add(newPart);
+                }
             }
 
             //remove title row
-            pilots.remove(0);
+            parts.remove(0);
 
         } catch (CsvValidationException e) {
             e.printStackTrace();
         }
 
-        return pilots;
+        return parts;
     }
 }
