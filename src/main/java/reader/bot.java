@@ -17,19 +17,22 @@ public class bot extends ListenerAdapter
 {
     static ArrayList<pilot> pilotList;
     static ArrayList<part> partList;
+    static ArrayList<mech> mechList;
 
 
-    public static void main(String[] args) throws LoginException, IOException {
+    public static void main(String[] args) throws Exception {
 
+        mechList = mechReader.read();
         pilotList = pilotReader.read();
         partList = partReader.read();
 
         //TO DO replace with JDABuilder.create
-        new JDABuilder(AccountType.BOT)
-            .setToken("NzE5MzI1MzI4NTQzMTg2OTQ1.Xt2ytg.kudGQjcChJDyf8kAuX0UDSWy7yo")
-            .addEventListeners(new bot())
-            .setActivity(Activity.playing("Fraga wide chaos"))
-            .build();
+        JDABuilder.createDefault("NzE5MzI1MzI4NTQzMTg2OTQ1.Xt54kA.18XlV_OmxQIJUWiykMiEK8PnGbo").addEventListeners(new bot()).build();
+//        new JDABuilder(AccountType.BOT)
+//            .setToken("NzE5MzI1MzI4NTQzMTg2OTQ1.Xt54kA.18XlV_OmxQIJUWiykMiEK8PnGbo")
+//            .addEventListeners(new bot())
+//            .setActivity(Activity.playing("Fraga wide chaos"))
+//            .build();
 
     }
 
@@ -67,7 +70,95 @@ public class bot extends ListenerAdapter
                     }
                 }
             }
+            else if (prefix.equals("!mech"))
+            {
+                for(mech mech : mechList){
+                    if(mech.getName() != null && mech.getName().toLowerCase().equals(query))
+                    {
+                        createMechEmbed(mech);
+                        event.getMessage().delete().queue();
+                        event.getChannel().sendMessage(createMechEmbed(mech)).queue();
+                    }
+                }
+            }
         }
+    }
+
+    private StringBuilder buildMechBasicInfo(mech mech)
+    {
+        StringBuilder basicInfo  = new StringBuilder();
+        basicInfo.append("Rank: ");
+        basicInfo.append(mech.getRank());
+        basicInfo.append(System.getProperty("line.separator"));
+        basicInfo.append("Chassis Feature: ");
+        basicInfo.append(mech.getChassisFeature());
+        basicInfo.append(System.getProperty("line.separator"));
+        basicInfo.append("HP: ");
+        basicInfo.append(mech.getHp());
+        basicInfo.append(System.getProperty("line.separator"));
+        basicInfo.append("Size: ");
+        basicInfo.append(mech.getSize());
+        basicInfo.append(System.getProperty("line.separator"));
+        basicInfo.append("Velocity: ");
+        basicInfo.append(mech.getVelocity());
+        basicInfo.append(System.getProperty("line.separator"));
+
+        return basicInfo;
+    }
+
+    private StringBuilder buildMechWeapons(mech mech)
+    {
+        StringBuilder weapons  = new StringBuilder();
+
+        for (weapon weapon : mech.getWeapons())
+        {
+            weapons.append(weapon.getName());
+            weapons.append(" ");
+            weapons.append(weapon.getType());
+            weapons.append(" ");
+            weapons.append(weapon.getDamageString());
+            weapons.append(" ");
+            weapons.append(weapon.getElement());
+            weapons.append(" ");
+            weapons.append(weapon.getRank());
+            weapons.append(System.getProperty("line.separator"));
+        }
+
+        return weapons;
+    }
+
+    private StringBuilder buildMechAbilities(mech mech)
+    {
+        StringBuilder uniqueAbilities = new StringBuilder();
+
+        for (uniqueAbility uniqA : mech.getUniqueAbility()) {
+
+            uniqueAbilities.append(uniqA.getName());
+            uniqueAbilities.append(" ");
+            uniqueAbilities.append(uniqA.getCooldown());
+            uniqueAbilities.append(System.getProperty("line.separator"));
+
+        }
+
+        return uniqueAbilities;
+    }
+
+    private MessageEmbed createMechEmbed(mech mech) {
+
+        StringBuilder basicInfo = buildMechBasicInfo(mech);
+        StringBuilder weapons = buildMechWeapons(mech);
+        StringBuilder uniqueAbilities = buildMechAbilities(mech);
+
+        EmbedBuilder builder = new EmbedBuilder()
+                .addField("Basic Info", basicInfo.toString(), false)
+                .addField("Weapons", weapons.toString(), false)
+                .addField("Unique Abilities", uniqueAbilities.toString(), false)
+                .setColor(Color.ORANGE)
+                .setTitle(mech.getName())
+                .setThumbnail(mech.getImgUrl());
+
+        return builder.build();
+
     }
 
     private MessageEmbed createPartEmbed(part part) {
