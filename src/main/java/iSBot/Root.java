@@ -1,7 +1,7 @@
-package reader;
+package iSBot;
 
 import java.util.ArrayList;
-import java.util.List;
+
 public class Root
 {
     private ArrayList<mech> mechs;

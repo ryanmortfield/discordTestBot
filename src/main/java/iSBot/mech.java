@@ -1,4 +1,4 @@
-package reader;
+package iSBot;
 
 import java.util.List;
 

@@ -18,33 +18,84 @@ Secondary Armament Core,core,green,,
 Burst Core,core,green,,
 Portable Landmine,core,green,,
 Large Cooling Core,core,green,,
-Shield Core,core,blue,,
-Enhanced Attack Core,core,blue,,
-Rage Core,core,blue,,
-Sapphire Gem,core,blue,,
-High Torque Joint,core,blue,,
-Axle Bearing,core,blue,,
-Overload Core,core,blue,,
-Main Armament Core,core,blue,,
-Overclocked Cooling Core,core,blue,,
-Elemental Core,core,blue,,
-Missile Core,core,purple,,
-Shotgun Core,core,purple,,
-Transmission Core,core,purple,,
-Extreme Cooling Core,core,purple,,
-Multi-core Processor,core,purple,,
-Balanced Core,core,purple,,
-Crimson Gem,core,purple,,
-Nerve Intensifier,core,purple,,
-Enhanced Charge Core,core,purple,,
-Guren Avenger,core,purple,,
-Revolver Core,core,purple,,
-Ejected Burst Core,core,purple,,
-Tesla Engine,core,purple,,
-Multi-threaded System,core,purple,,
-Refresh Orb,core,purple,,
-Large Defense Core,core,purple,,
-Large Attack Core,core,purple,,
-Maintenance Core,core,purple,,
-Double Cooling Core,core,purple,,
-Firearm Suppressor,core,purple,,
+Shield Core,core,blue,,https://rwiki.jp/attach/ironsaga/b/bc/12077/5cd6a8a8506aa49a7a5786f93c0f7210.png
+Enhanced Attack Core,core,blue,,https://rwiki.jp/attach/ironsaga/5/5b/12078/e19e54013f4f9b51545ca4bdfde42bdd.png
+Rage Core,core,blue,,https://rwiki.jp/attach/ironsaga/3/3d/12075/aad46d1c92a8a79da98816d001a4954d.png
+Sapphire Gem,core,blue,,https://rwiki.jp/attach/ironsaga/e/ef/12063/4f6a245e6c42df8a64b965fcf4d8d45c.png
+High Torque Joint,core,blue,,https://rwiki.jp/attach/ironsaga/e/ef/12076/8a5a173b01864ea2b7498d9c38d83a28.png
+Axle Bearing,core,blue,,https://rwiki.jp/attach/ironsaga/7/74/12064/806c940fe6226218c984f832cad93561.png
+Overload Core,core,blue,,https://rwiki.jp/attach/ironsaga/0/04/12083/2747f6803360bc10928228b70471eca4.png
+Main Armament Core,core,blue,,https://rwiki.jp/attach/ironsaga/b/b6/12057/e3a7c797e8b7f645d4343356d8ceaacf.png
+Overclocked Cooling Core,core,blue,,https://rwiki.jp/attach/ironsaga/8/8e/12065/f87bfabd9f82051b30454fafa714ea13.png
+Elemental Core,core,blue,,https://rwiki.jp/attach/ironsaga/f/f1/12082/1eee90327a54b204dcc34fcdf912a054.png
+Missile Core,core,purple,Missile weapon ATK +40%. Missile weapon have a 18% chance to fire an additional free missile. This effect cannot stack with any other ammo consuming effects.,https://rwiki.jp/attach/ironsaga/f/f3/12059/bf00057db6805b522d00ba199a956fae.png
+Shotgun Core,core,purple,Shotgun ATK +45%. Shotgun have a 15% chance to not consume any ammo. Cooldown: 1s.,https://rwiki.jp/attach/ironsaga/a/a6/13608/d30a8e4b389f01a911316951cd649c2c.png
+Transmission Core,core,purple,Melee damage +45%. Mech's ability cooldown -18%.,https://rwiki.jp/attach/ironsaga/0/06/12072/4a85d5d29cdd7ea051457759dde633d9.png
+Extreme Cooling Core,core,purple,All weapon reload faster by +40%. Switching between weapons and abilities is 30% faster.,https://rwiki.jp/attach/ironsaga/c/c3/12071/7b09d84a331f7af4119844f13a028b5f.png
+Multi-core Processor,core,purple,All weapon ATK +40%. Can attack with two identical weapons simultaneously.,https://rwiki.jp/attach/ironsaga/c/c2/12074/f50acdc3e8b477b320ec21a210fa6a53.png
+Balanced Core,core,purple,All weapon ATK +25%. HP +25%.,https://rwiki.jp/attach/ironsaga/0/00/12054/6bed4d64559208f1a8731bec9fd495e6.png
+Crimson Gem,core,purple,Beam and fire ATK +50%. Beam and fire attack will ignore 20% of enemy pilot's defense stat.,https://rwiki.jp/attach/ironsaga/1/16/12052/d457ebeb218865bcc49c407218bcc8d8.png
+Nerve Intensifier,core,purple,All pilot status +150. Aircraft movement speed +15%.,https://rwiki.jp/attach/ironsaga/9/90/13609/731507a879374255a97b1c53583b463c.png
+Enhanced Charge Core,core,purple,HP +35%. Tackles target enemy when active skill is used. Damages scales with part level.,https://rwiki.jp/attach/ironsaga/a/a8/13368/c79e2834c692a702f78be63f806345ee.png
+Guren Avenger,core,purple,HP +25%. Plants a guren mine every 3 seconds. Scatter a minefield of guren mines when destroyed. Destroyed dopplgangers won't trigger this effect. Damage scales with part level.,https://rwiki.jp/attach/ironsaga/0/06/12055/bf4a3490b96c558c1ede8ece4bed38ee.png
+Revolver Core,core,purple,Automatic and burst ATK +50%. Automatic and burst magazine +1.,https://rwiki.jp/attach/ironsaga/5/5d/12050/07f4997ac6d740c34bcfabcaab6aa1fa.png
+Ejected Burst Core,core,purple,Burst ATK +50%. All weapon attack interval -50%.,https://rwiki.jp/attach/ironsaga/8/82/12066/b05e5137cead79c746e81a50ebf2e6c2.png
+Tesla Engine,core,purple,Increase shield duration by 40% and decrease shield cooldown by 40%.This effect can stack. Increase aircraft's unique ability by +20%. This effect can stack. Increase reaction stat when moving.,https://rwiki.jp/attach/ironsaga/e/ea/12067/a3b28268e98b4605e2fca834b58b4232.png
+Multi-threaded System,core,purple,"For each unique weapon (Main, secondary, missile, melee and special weapon) equipped on the mech, increase final damage dealt by 6%.",https://rwiki.jp/attach/ironsaga/e/ef/13607/37065a068020707aea922e16a8a285b6.png
+Refresh Orb,core,purple,HP+ 25%. Gain 10% SP at the start of the battle. Active skill canbe used one additioal time. This effect can stack.,https://rwiki.jp/attach/ironsaga/8/8f/12051/4b4525ed5515a2504e23d3e551168354.png
+Large Defense Core,core,purple,HP+ 30%. Team Aura: Reduce all damage received by -10%. Does not stack with same type of aura effect.,https://rwiki.jp/attach/ironsaga/5/5b/12068/69546100fe5b819bbf46b9b799385da5.png
+Large Attack Core,core,purple,All weapon ATK +40%. First weapon ATK +40%.,https://rwiki.jp/attach/ironsaga/9/94/12070/3195b5e9ddd10966f2505836355dda92.png
+Maintenance Core,core,purple,HP +15%. heals +1.5% of maximum HP every second. This effect cannot stack. Recovers 15% of maximum HP when active skill is used. This effect cannot stack.,https://rwiki.jp/attach/ironsaga/7/78/12069/fe00bc136f28299c605ccd72b9d9cc28.png
+Double Cooling Core,core,purple,All weapon reload faster by +40%. All weapon attack interval -50%.,https://rwiki.jp/attach/ironsaga/a/a5/12060/33ce8b5ef39bbee163525600f4449c18.png
+Firearm Suppressor,core,purple,Secondary arament ATK +50%. Increases secondary armament's range and muzzle velocity by +50%. This effect does not apply to beam weapon.,https://rwiki.jp/attach/ironsaga/c/cc/12053/b3e24b5c007819041b68672a39c5550c.png
+Reaction Intensifier,core,purple,"Switching between weapons and abilities is +30% faster. When an opponent uses an active skill, Increase all of the pilot's stats by 30% for 6s..",https://rwiki.jp/attach/ironsaga/1/18/15211/2be471859be893a0dae3a07142b32b08.png
+S-Weapon Limit Break,core,purple,Super Weapon ATK +50%. When an active skill was used during the battle Instantly reload super weapons by 50%...,https://rwiki.jp/attach/ironsaga/1/1b/15200/f60d4b05fba6cb8704a3ff6a15935e56.png
+AP Shell,shell,white,Main Armament ATK +25%,
+Basic Shell,shell,white,Rank 1 and rank 2 weapon ATK +50%,
+HE Shell,shell,white,Explosive ATK+30%,
+Portable Missile box,shell,white,Missile weapon ATK +15%. Launch a missile every 2 second.,
+Reckless Sword,shell,white,Melee Damage +60% Ranged Damage -50%,
+Single-Shot Shell,shell,white,Single-shot ATK +20%. Single-shot reload faster by +10%,
+Beam Shell,shell,green,,
+Compressed Shotshell,shell,green,Shotgun ATK +20% Increase shotgun cartridge by 1.,
+Corrosive Shell,shell,green,,
+Energy-Absorption Shell,shell,green,,
+EM Shell,shell,green,,
+Intermediate Shell,shell,green,Rank 2 and rank 3 weapon ATK +35%.,
+Large HE Shell,shell,green,,
+Napalm Shell,shell,green,,
+Plastic Sabot,shell,green,,
+Rifiling Shell,shell,green,,
+Rocket Fist,shell,green,,
+Seeker,shell,green,,
+Vibration Dagger,shell,green,,
+Wide Range Beam,shell,green,,
+Advanced Shell,shell,blue,,
+Condensed AP Shell,shell,blue,,
+Enhanced Single-shot,shell,blue,,
+Fin-Stabilized Shell,shell,blue,,
+Freezing Shell,shell,blue,,
+High-Tech Shell,shell,blue,,
+Intensive Shell,shell,blue,,
+Negative Energy Beam,shell,blue,,
+Ordinary Shell,shell,blue,,
+Parallel Missile,shell,blue,,
+Stun Grenade,shell,blue,,
+Absolute-Zero Shell,shell,purple,,
+Acid Shell,shell,purple,Acid ATK +50%. Increase corrosion duration by +50%.,
+Charged Shell,shell,purple,Single-shot ATK +35%. Increase single-shot ATK by an extra 1% every second. Maximum 50%,
+Combo Counter,shell,purple,,
+Condensed HE Shell,shell,purple,Explosive ATK +75%. Decrease explosive attack's explosion radius by -75%.,
+Ether Shell,shell,purple,,
+Flame Shell,shell,purple,Fire ATK +50%. Increase burn duration dealt by +100%.,
+Helix Shell,shell,purple,,
+High Energy-Absorption,shell,purple,,
+High-Brass Shotshell,shell,purple,Shotgun ATK +30%. Increase shotgun cartridge by 2.,
+High-Frequency Oscillator,shell,purple,,
+Hyper AP Shell,shell,purple,,
+Hyper Beam Sword,shell,purple,,
+Large Plastic Sabot,shell,purple,,
+Multi-Explosive Missiles,shell,purple,,
+Plasma Shell,shell,purple,EM and beam ATK +35%. EM and beam inflict -50% armor break. Cooldown:3s.,
+Premium Shell,shell,purple,Rank 4 and above weapon ATK +45%,
+Smite Shell,shell,purple,Normal and explosive main armament ATK +45%. Normal and explosive main armament have a 33% chance to knock down targets and deal additional damage.,

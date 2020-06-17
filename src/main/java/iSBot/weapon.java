@@ -1,4 +1,4 @@
-package reader;
+package iSBot;
 public class weapon
 {
     private String name;

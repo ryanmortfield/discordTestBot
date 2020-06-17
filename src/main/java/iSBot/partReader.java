@@ -1,24 +1,26 @@
-package reader;
+package iSBot;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.io.File;
 
 public class partReader {
 
     public static ArrayList<part> read() throws IOException {
 
-        String fileName = "src/main/resources/parts.csv";
+        String fileName = "parts.csv";
         ArrayList<part> parts = new ArrayList<part>();
 
-        try (FileInputStream fis = new FileInputStream(fileName);
-             InputStreamReader isr = new InputStreamReader(fis,
+        InputStream inputStream = pilotReader.class.getResourceAsStream("/parts.csv");
+
+        try (//FileInputStream fis = new FileInputStream(fileName);
+             InputStreamReader isr = new InputStreamReader(inputStream,
                      StandardCharsets.UTF_8);
              CSVReader reader = new CSVReader(isr)) {
             String[] nextLine;

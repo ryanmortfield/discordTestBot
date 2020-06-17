@@ -1,4 +1,4 @@
-package reader;
+package iSBot;
 
 public class part {
     String name;

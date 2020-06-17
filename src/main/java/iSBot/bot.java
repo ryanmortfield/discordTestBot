@@ -1,16 +1,12 @@
-package reader;
+package iSBot;
 
-import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-import javax.security.auth.login.LoginException;
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class bot extends ListenerAdapter
@@ -19,27 +15,20 @@ public class bot extends ListenerAdapter
     static ArrayList<part> partList;
     static ArrayList<mech> mechList;
 
-
     public static void main(String[] args) throws Exception {
 
+        //load in data
         mechList = mechReader.read();
         pilotList = pilotReader.read();
         partList = partReader.read();
 
-        //TO DO replace with JDABuilder.create
-        JDABuilder.createDefault("NzE5MzI1MzI4NTQzMTg2OTQ1.Xt54kA.18XlV_OmxQIJUWiykMiEK8PnGbo").addEventListeners(new bot()).build();
-//        new JDABuilder(AccountType.BOT)
-//            .setToken("NzE5MzI1MzI4NTQzMTg2OTQ1.Xt54kA.18XlV_OmxQIJUWiykMiEK8PnGbo")
-//            .addEventListeners(new bot())
-//            .setActivity(Activity.playing("Fraga wide chaos"))
-//            .build();
+        JDABuilder.createDefault(args[0]).addEventListeners(new bot()).build();
 
     }
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event)
     {
-        System.out.println(event.getAuthor().getName() + ": " + event.getMessage().getContentDisplay() + event.getTextChannel());
         if(event.getAuthor().isBot()) return; // DO NOT DEL,checks if msg is from the bot.
         String user_message = event.getMessage().getContentRaw(); // gets user msg.
 

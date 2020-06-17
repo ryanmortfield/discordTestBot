@@ -1,4 +1,4 @@
-package reader;
+package iSBot;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,19 +9,20 @@ public class mechReader {
 
     public static ArrayList<mech> read() throws Exception {
 
-        String filePath = "src/main/resources/mechs.json";
+        String filePath = "mechs.json";
         ArrayList<mech> mechs = new ArrayList<mech>();
+
+
+        InputStream inputStream = mechReader.class.getResourceAsStream("/mechs.json");
 
         Gson gson = new Gson();
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader(filePath));
+            br = new BufferedReader(new InputStreamReader(inputStream));
             Root result = gson.fromJson(br, Root.class);
             if (result != null) {
                 mechs = result.getMechs();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } finally {
             if (br != null) {
                 try {
