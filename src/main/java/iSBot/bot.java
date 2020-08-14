@@ -16,13 +16,15 @@ public class bot extends ListenerAdapter
     static ArrayList<mech> mechList;
 
     public static void main(String[] args) throws Exception {
-
         //load in data
         mechList = mechReader.read();
-        pilotList = pilotReader.read();
+        //pilotList = pilotReader.read();
+        pilotList = wikiScraperPilots.scrape();
         partList = partReader.read();
 
-        JDABuilder.createDefault(args[0]).addEventListeners(new bot()).build();
+        //JDABuilder.createDefault(args[0]).addEventListeners(new bot()).build();
+
+        JDABuilder.createDefault("NzE5MzI1MzI4NTQzMTg2OTQ1.Xt1x6g.S4qtJfVzYxs1TZDeldPpzpSMDTk").addEventListeners(new bot()).build();
 
     }
 
