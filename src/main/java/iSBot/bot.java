@@ -16,15 +16,12 @@ public class bot extends ListenerAdapter
     static ArrayList<mech> mechList;
 
     public static void main(String[] args) throws Exception {
-        //load in data
+
         mechList = mechReader.read();
-        //pilotList = pilotReader.read();
         pilotList = wikiScraperPilots.scrape();
-        partList = partReader.read();
+        partList = wikiScraperParts.scrape();
 
-        //JDABuilder.createDefault(args[0]).addEventListeners(new bot()).build();
-
-        JDABuilder.createDefault("NzE5MzI1MzI4NTQzMTg2OTQ1.Xt1x6g.S4qtJfVzYxs1TZDeldPpzpSMDTk").addEventListeners(new bot()).build();
+        JDABuilder.createDefault(args[0]).addEventListeners(new bot()).build();
 
     }
 
@@ -154,12 +151,9 @@ public class bot extends ListenerAdapter
 
     private MessageEmbed createPartEmbed(part part) {
 
-        StringBuilder effects  = new StringBuilder("Effects: ");
-        effects.append(part.partEffect);
-
-
         EmbedBuilder builder = new EmbedBuilder()
-                .addField(part.partType, effects.toString(), false)
+                .addField(part.partType, part.getPartEffect(), false)
+                .addField("Obtained", part.getObtained(), false)
                 .setColor(setColor(part.quality))
                 .setTitle(part.getName())
                 .setThumbnail(part.imgUrl);
