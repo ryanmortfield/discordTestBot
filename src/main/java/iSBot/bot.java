@@ -1,5 +1,7 @@
 package iSBot;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+import me.xdrop.fuzzywuzzy.model.BoundExtractedResult;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -8,18 +10,23 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class bot extends ListenerAdapter
 {
     static ArrayList<pilot> pilotList;
     static ArrayList<part> partList;
     static ArrayList<mech> mechList;
+    static ArrayList<pet> petList;
 
     public static void main(String[] args) throws Exception {
 
-        mechList = mechReader.read();
+        wikiScraperMech mechScraper = new wikiScraperMech();
+
+        mechList = mechScraper.scrape();
         pilotList = wikiScraperPilots.scrape();
         partList = wikiScraperParts.scrape();
+        petList = wikiScraperPets.scrape();
 
         JDABuilder.createDefault(args[0]).addEventListeners(new bot()).build();
 
@@ -39,38 +46,66 @@ public class bot extends ListenerAdapter
 
             if (prefix.equals("!pilot"))
             {
-                for(pilot pilot : pilotList){
-                    if(pilot.getName() != null && pilot.getName().equals(query))
-                    {
-                        event.getMessage().delete().queue();
-                        event.getChannel().sendMessage(createPilotEmbed(pilot)).queue();
-                    }
-                }
+                pilot pilot = fuzzyPilotSearch(query);
+                event.getMessage().delete().queue();
+                event.getChannel().sendMessage(createPilotEmbed(pilot)).queue();
+
             }
             else if (prefix.equals("!part"))
             {
-                for(part part : partList){
-                    if(part.getName() != null && part.getName().toLowerCase().equals(query))
-                    {
-                        createPartEmbed(part);
-                        event.getMessage().delete().queue();
-                        event.getChannel().sendMessage(createPartEmbed(part)).queue();
-                    }
-                }
+                part part = fuzzyPartSearch(query);
+                event.getMessage().delete().queue();
+                event.getChannel().sendMessage(createPartEmbed(part)).queue();
+
             }
             else if (prefix.equals("!mech"))
             {
-                for(mech mech : mechList){
-                    if(mech.getName() != null && mech.getName().toLowerCase().equals(query))
-                    {
-                        createMechEmbed(mech);
-                        event.getMessage().delete().queue();
-                        event.getChannel().sendMessage(createMechEmbed(mech)).queue();
-                    }
-                }
+                mech mech = fuzzyMechSearch(query);
+                event.getMessage().delete().queue();
+                event.getChannel().sendMessage(createMechEmbed(mech)).queue();
+
+            }
+            else if (prefix.equals("!pet"))
+            {
+                pet pet = fuzzyPetSearch(query);
+                event.getMessage().delete().queue();
+                event.getChannel().sendMessage(createPetEmbed(pet)).queue();
             }
         }
     }
+
+    private mech fuzzyMechSearch(String term)
+    {
+        BoundExtractedResult<mech> match = FuzzySearch.extractOne(term,wikiScraperMech.getCollection(), x -> x.getName());
+        mech matchMech = match.getReferent();
+
+        return matchMech;
+    }
+
+    private part fuzzyPartSearch(String term)
+    {
+        BoundExtractedResult<part> match = FuzzySearch.extractOne(term,wikiScraperParts.getCollection(), x -> x.getName());
+        part matchPart = match.getReferent();
+
+        return matchPart;
+    }
+
+    private pilot fuzzyPilotSearch(String term)
+    {
+        BoundExtractedResult<pilot> match = FuzzySearch.extractOne(term,wikiScraperPilots.getCollection(), x -> x.getName());
+        pilot matchPilot = match.getReferent();
+
+        return matchPilot;
+    }
+
+    private pet fuzzyPetSearch(String term)
+    {
+        BoundExtractedResult<pet> match = FuzzySearch.extractOne(term,wikiScraperPets.getCollection(), x -> x.getName());
+        pet matchPet = match.getReferent();
+
+        return matchPet;
+    }
+
 
     private StringBuilder buildMechBasicInfo(mech mech)
     {
@@ -104,11 +139,12 @@ public class bot extends ListenerAdapter
             weapons.append(" ");
             weapons.append(weapon.getType());
             weapons.append(" ");
-            weapons.append(weapon.getDamageString());
-            weapons.append(" ");
-            weapons.append(weapon.getElement());
-            weapons.append(" ");
-            weapons.append(weapon.getRank());
+            weapons.append(weapon.getAttribute());
+//            weapons.append(weapon.getDamageString());
+//            weapons.append(" ");
+//            weapons.append(weapon.getElement());
+//            weapons.append(" ");
+//            weapons.append(weapon.getRank());
             weapons.append(System.getProperty("line.separator"));
         }
 
@@ -160,6 +196,17 @@ public class bot extends ListenerAdapter
 
         return builder.build();
 
+    }
+
+    private MessageEmbed createPetEmbed(pet pet) {
+        EmbedBuilder builder = new EmbedBuilder()
+                .addField("Effect",pet.getPetEffect(), false)
+                .addField("Obtained", pet.getObtained(), false)
+                .setColor(Color.BLACK)
+                .setTitle(pet.getName())
+                .setThumbnail(pet.getIcon());
+
+        return builder.build();
     }
 
     private Color setColor(String quality)

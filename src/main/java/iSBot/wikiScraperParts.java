@@ -2,6 +2,7 @@ package iSBot;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -81,4 +82,8 @@ public class wikiScraperParts {
 
     }
 
+    public static Collection<part> getCollection() {
+
+        return partList;
+    }
 }

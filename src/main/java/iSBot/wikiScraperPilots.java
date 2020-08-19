@@ -2,6 +2,7 @@ package iSBot;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -11,6 +12,7 @@ import org.jsoup.select.Elements;
 
 public class wikiScraperPilots {
 
+    static ArrayList<pilot> pilots = new ArrayList<pilot>();
 
     public static ArrayList<pilot> scrape() throws Exception {
 
@@ -22,7 +24,7 @@ public class wikiScraperPilots {
 
     private static ArrayList<pilot> getPilotInfo(List<Entry> pilotNames) throws Exception {
 
-        ArrayList<pilot> pilots = new ArrayList<pilot>();
+
         int pilotDescIndex = 8;
         int pilotSkill1 = 15;
         int pilotSkill2 = 16;
@@ -31,9 +33,9 @@ public class wikiScraperPilots {
 
         try {
             for (Entry pilot : pilotNames) {
-                String url = "https://ironsaga.fandom.com/wiki/" + pilot.getName();
+                String url = "https://ironsaga.fandom.com" + pilot.getDetailsUrl();
 
-                String out = "Getting pilot infor for: " + pilot.getName();
+                String out = "Getting pilot info for: " + pilot.getName();
                 System.out.println(out);
 
                 Document doc = Jsoup.connect(url).get();
@@ -101,13 +103,13 @@ public class wikiScraperPilots {
                     continue;
                 }
 
-                int index = 0;                              // Instead of index you can use 0, 1, 2, ...
                 Entry tableEntry = new Entry();
                 Elements td = element.select("td");         // Select all 'td' tags of the 'tr'
 
                 // Fill your entry
-                tableEntry.setName(td.get(index++).text());
-                String href = td.get(index++).children().first().attributes().get("href");
+                tableEntry.setName(td.get(0).text());
+                tableEntry.setDetailsUrl(td.get(0).children().first().attributes().get("href"));
+                String href = td.get(1).children().first().attributes().get("href");
                 tableEntry.setPortraitUrl(href);
 
                 entries.add(tableEntry);                    // Finally add it to the list
@@ -119,10 +121,24 @@ public class wikiScraperPilots {
         return entries;
     }
 
+    public static Collection<pilot> getCollection() {
+        return pilots;
+    }
+
     public static class Entry
     {
         private String name;
         private String portraitUrl;
+
+        public String getDetailsUrl() {
+            return detailsUrl;
+        }
+
+        public void setDetailsUrl(String detailsUrl) {
+            this.detailsUrl = detailsUrl;
+        }
+
+        private String detailsUrl;
 
         public Entry(String name) {
             this.name = name;

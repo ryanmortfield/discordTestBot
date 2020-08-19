@@ -4,10 +4,9 @@ import java.util.List;
 
 public class mech
 {
+    private String name;
 
     private String rank;
-
-    private String name;
 
     private String chassisFeature;
 

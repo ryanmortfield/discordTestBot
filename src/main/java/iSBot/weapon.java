@@ -9,6 +9,8 @@ public class weapon
 
     private String element;
 
+    private String attribute;
+
     private int rank;
 
     public void setName(String name){
@@ -41,4 +43,11 @@ public class weapon
     public int getRank(){
         return this.rank;
     }
+    public void setAttribute(String attribute){
+        this.attribute = attribute;
+    }
+    public String getAttribute(){
+        return this.attribute;
+    }
+
 }
