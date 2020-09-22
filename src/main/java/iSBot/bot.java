@@ -262,7 +262,7 @@ public class bot extends ListenerAdapter
     private MessageEmbed createUpdateEmbed()
     {
         EmbedBuilder builder = new EmbedBuilder()
-                .setTitle("update queued");
+                .setTitle("update finished");
 
         return builder.build();
     }
