@@ -14,19 +14,18 @@ public class wikiScraperPets {
     static ArrayList<pet> petList = new ArrayList<>();
 
     public static ArrayList<pet> scrape() throws Exception {
+
         return getpets();
     }
 
     private static ArrayList<pet> getpets() {
 
+        System.out.println("Getting pets");
+
         try {
             Document doc = Jsoup.connect("https://ironsaga.fandom.com/wiki/Pet_List").get();
 
-            ArrayList<Element> tables = new ArrayList<Element>();
-
             boolean firstSkipped = false;
-
-            ArrayList<Elements> tds = new ArrayList<Elements>();
 
             for(Element element : doc.select("tr") ) {
                 // Skip the first 'tr' tag since it's the header
@@ -50,6 +49,8 @@ public class wikiScraperPets {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println("done");
 
         return petList;
     }

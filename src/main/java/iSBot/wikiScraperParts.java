@@ -20,6 +20,7 @@ public class wikiScraperParts {
     }
 
     private static ArrayList<part> getPartInfo() {
+        System.out.println("Getting parts");
         try {
             Document doc = Jsoup.connect("https://ironsaga.fandom.com/wiki/Parts_List").get();
 
@@ -61,6 +62,8 @@ public class wikiScraperParts {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println("done");
         return partList;
     }
 

@@ -16,6 +16,8 @@ public class wikiScraperPilots {
 
     public static ArrayList<pilot> scrape() throws Exception {
 
+        System.out.println("Getting pilots");
+
         List<Entry> pilotNames = getPilotNames();
 
         return getPilotInfo(pilotNames);
@@ -33,10 +35,8 @@ public class wikiScraperPilots {
 
         try {
             for (Entry pilot : pilotNames) {
-                String url = "https://ironsaga.fandom.com" + pilot.getDetailsUrl();
 
-                String out = "Getting pilot info for: " + pilot.getName();
-                System.out.println(out);
+                String url = "https://ironsaga.fandom.com" + pilot.getDetailsUrl();
 
                 Document doc = Jsoup.connect(url).get();
 
@@ -118,6 +118,7 @@ public class wikiScraperPilots {
             e.printStackTrace();
         }
 
+        System.out.println("done");
         return entries;
     }
 

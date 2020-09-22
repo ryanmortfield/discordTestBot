@@ -4,13 +4,16 @@ import me.xdrop.fuzzywuzzy.FuzzySearch;
 import me.xdrop.fuzzywuzzy.model.BoundExtractedResult;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class bot extends ListenerAdapter
 {
@@ -21,16 +24,63 @@ public class bot extends ListenerAdapter
 
     public static void main(String[] args) throws Exception {
 
-        wikiScraperMech mechScraper = new wikiScraperMech();
+        ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
+        ses.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    wikiScrapeAll();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 0, 24, TimeUnit.HOURS);
 
-        mechList = mechScraper.scrape();
-        pilotList = wikiScraperPilots.scrape();
-        partList = wikiScraperParts.scrape();
-        petList = wikiScraperPets.scrape();
 
         JDABuilder.createDefault(args[0]).addEventListeners(new bot()).build();
 
     }
+
+    private static Role getRole(MessageReceivedEvent event)
+    {
+        User user = event.getAuthor();
+        Guild guild = event.getGuild();
+        Member member = guild.getMember(user);
+        List<Role> roles = member.getRoles();
+
+        return roles.stream()
+                .filter(role -> role.getName().equals("bot-contributor")) // filter by role name
+                .findFirst() // take first result
+                .orElse(null); // else return null
+
+    }
+
+    private static void wikiScrapeAll() throws Exception
+    {
+        updateMechs();
+        updateParts();
+        updatePets();
+        updatePilots();
+    }
+
+    private static void updateMechs() throws Exception {
+        wikiScraperMech mechScraper = new wikiScraperMech();
+        mechList = mechScraper.scrape();
+        System.out.println("Update");
+    }
+
+    private static void updatePilots() throws Exception {
+        pilotList = wikiScraperPilots.scrape();
+    }
+
+    private static void updatePets() throws Exception {
+        petList = wikiScraperPets.scrape();
+    }
+
+    private static void updateParts() throws Exception {
+        partList = wikiScraperParts.scrape();
+    }
+
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event)
@@ -71,8 +121,50 @@ public class bot extends ListenerAdapter
                 event.getMessage().delete().queue();
                 event.getChannel().sendMessage(createPetEmbed(pet)).queue();
             }
+            else if(prefix.equals("!update"))
+            {
+                if(getRole(event)!= null)
+                {
+                    if (query.equals("mechs"))
+                    {
+                        try {
+                            updateMechs();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else if (query.equals("pilots"))
+                    {
+                        try {
+                            updatePilots();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else if (query.equals("parts"))
+                    {
+                        try {
+                            updateParts();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else if (query.equals("pets"))
+                    {
+                        try {
+                            updatePets();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    event.getMessage().delete().queue();
+                    event.getChannel().sendMessage(createUpdateEmbed()).queue();
+                }
+            }
         }
     }
+
+
 
     private mech fuzzyMechSearch(String term)
     {
@@ -165,6 +257,14 @@ public class bot extends ListenerAdapter
         }
 
         return uniqueAbilities;
+    }
+
+    private MessageEmbed createUpdateEmbed()
+    {
+        EmbedBuilder builder = new EmbedBuilder()
+                .setTitle("update queued");
+
+        return builder.build();
     }
 
     private MessageEmbed createMechEmbed(mech mech) {

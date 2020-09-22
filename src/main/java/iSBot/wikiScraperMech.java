@@ -16,6 +16,8 @@ public class wikiScraperMech {
 
     public ArrayList<mech> scrape() throws Exception {
 
+        System.out.println("Getting Mechs");
+
         List<Entry> mechNames = getMechNames();
 
         return getMechInfo(mechNames);
@@ -29,8 +31,6 @@ public class wikiScraperMech {
     private String getUrl(Entry mech)
     {
         String url = "https://ironsaga.fandom.com" + mech.getDetailsUrl();
-        System.out.println(url);
-
         return url;
     }
 
@@ -149,8 +149,6 @@ public class wikiScraperMech {
             try {
                 String url = getUrl(mech);
 
-                String out = "Getting mech info for: " + mech.getName();
-                System.out.println(out);
                 Document doc = getMechInfoPage(url);
 
                 ArrayList<Elements> tds = getTDs(doc);
@@ -169,6 +167,7 @@ public class wikiScraperMech {
             }
 
         }
+        System.out.println("Done");
         return mechList;
     }
 
